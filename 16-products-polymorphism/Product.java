@@ -1,4 +1,8 @@
-public class Product extends Object {
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public abstract class Product implements CartItemInterface {
     private String name;
     private String sku;
     private double price;
@@ -54,8 +58,30 @@ public class Product extends Object {
         return name + ", " + sku + ", $" + price;
     }
 
+    public void edit(Scanner sc) {
+        System.out.println("New Product Name: ");
+        String newName = sc.nextLine();
+        if (!newName.isEmpty()) {
+            this.name = newName;
+        }
 
+        System.out.println("Enter the new SKU: ");
+        String newSku = sc.nextLine();
+        if (!newSku.isEmpty()) {
+            this.sku = newSku;
+        }
 
+        System.out.println("Enter the new price: ");
+        String newPrice = sc.nextLine();
+        if (!newPrice.isEmpty()) {
+            this.price = Double.parseDouble(newPrice);
+        }
+    }
+
+    @Override
+    public void addToCart(ArrayList<CartItemInterface> cart) {
+        cart.add(this);
+    }
     
     
 }

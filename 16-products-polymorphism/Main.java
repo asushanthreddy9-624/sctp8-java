@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
     private static Scanner sc;
     private static ArrayList<Product> productList = new ArrayList<>();
+    private static ArrayList<CartItemInterface> cart = new ArrayList<>(); 
     public static void main(String[] args) {
 
         productList.add(new PhysicalProduct(
@@ -33,8 +34,14 @@ public class Main {
             if (choice==3) {
                 editProduct();
             }
-            // choice 3 is quit
-            if (choice == 4) {
+            if (choice==4) {
+                deleteProduct();
+            }
+            if (choice==5) {
+                addToCart();
+            }
+            // choice 5 is quit
+            if (choice == 6) {
                 break;
             }
         }
@@ -48,12 +55,14 @@ public class Main {
             System.out.println("1. Add a product");
             System.out.println("2. List all products");
             System.out.println("3. Edit Product");
-            System.out.println("4. Exit");
+            System.out.println("4. Delete Product");
+            System.out.println("5. Add To Cart");
+            System.out.println("6. Exit");
 
             System.out.println("Enter your choice: ");
             choice = sc.nextInt();
             sc.nextLine(); // clear the input buffer
-            if (choice >= 1 && choice <= 4) {
+            if (choice >= 1 && choice <= 6) {
                 break;
             }
         }
@@ -126,10 +135,50 @@ public class Main {
         // display all the products
         displayProducts();
 
+        System.out.println("Select the product to edit");
         // the user will select one to edit
         int productIndexToEdit = sc.nextInt();
-        
+        sc.nextLine();
         // we display the edit portion for the product
         Product productToEdit = productList.get(productIndexToEdit);
+
+        productToEdit.edit(sc);
+
+        
+    }
+
+    private static void deleteProduct() {
+        System.out.println("Delete products");
+        displayProducts();
+        System.out.println("Enter the index of the product to delete:");
+        int productToDeleteIndex = sc.nextInt();
+        sc.nextLine();
+
+        // ensure that the index the user types in is within limits
+        if (productToDeleteIndex >=0 && productToDeleteIndex < productList.size()) {
+            productList.remove(productToDeleteIndex);
+        }
+    }
+
+    private static void addToCart() {
+        System.out.println("Add to Cart");
+
+        displayProducts();
+        System.out.println("Enter M to buy a membership");
+
+        String userChoice = sc.nextLine();
+        if (userChoice.toLowerCase().equals("m")) {
+            Membership m = new Membership(100, "VIP");
+            m.addToCart(cart);
+        } else {
+            int index = Integer.parseInt(userChoice);
+            Product p = productList.get(index);
+            p.addToCart(cart);
+
+        }
+
+        for (CartItemInterface c : cart) {
+            System.out.println(c.getName());
+        }
     }
 }

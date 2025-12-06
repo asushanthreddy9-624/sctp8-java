@@ -1,3 +1,6 @@
+
+import java.util.Scanner;
+
 public class PhysicalProduct extends Product {
     private String color;
     private double weight;
@@ -51,6 +54,29 @@ public class PhysicalProduct extends Product {
           " weight " + weight;
     }
 
+    @Override
+    public void edit(Scanner sc) {
+        super.edit(sc);
+
+        System.out.println("Enter the new size");
+        String newSize = sc.nextLine();
+        if (!newSize.isEmpty()) {
+            this.size = newSize;
+        }
+
+        System.out.println("Enter new color:");
+        String newColor = sc.nextLine();
+        if (!newColor.isEmpty()) {
+            this.color = newColor;
+        }
+
+
+        System.out.println("Enter the new weight:");
+        String newWeight = sc.nextLine();
+        if (!newWeight.isEmpty()) {
+            this.weight = Double.parseDouble(newWeight);
+        }
+    }
 
 
 
