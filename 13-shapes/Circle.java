@@ -20,4 +20,12 @@ public class Circle extends Shape {
         "radius: " + radius +
         "position" + x + "," + y;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }

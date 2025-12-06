@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+        // An abstract class cannot have an object created from it
+        // Shape s = new Shape();
+
         Rectangle r = new Rectangle("rect01", "red", 0,0, 5,5);
         System.out.println(r);
 
@@ -42,6 +45,17 @@ public class Main {
 
         for(Shape s : canvas) {
             System.out.println(s);
+        }
+
+        // how can we put to put Text objects and Shapes
+        // objects in the same arraylist. How?
+        ArrayList<HasPosition> drawableThings = new ArrayList<>();
+        drawableThings.add(new Text("The quick brown fox", 1,1));
+        drawableThings.add(r);
+        drawableThings.add(c);
+
+        for (HasPosition d : drawableThings) {
+            System.out.println(d.getX() + ", " + d.getY());
         }
  
 

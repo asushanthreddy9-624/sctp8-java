@@ -27,5 +27,11 @@ public class Rectangle extends Shape {
         + bottomRightX + "," + bottomRightY;
     }
 
+    public int getX() {
+        return topLeftX;
+    }
+    public int getY() {
+        return topLeftY;
+    }
 
 }

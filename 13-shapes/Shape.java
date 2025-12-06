@@ -1,4 +1,4 @@
-public class Shape {
+public abstract class Shape implements HasPosition {
     protected String name; 
     protected String color;
 
